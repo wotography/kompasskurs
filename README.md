@@ -1,5 +1,5 @@
 # Übung
 
-im **KompassKurs** von Starsteps
+im **KompassKurs** von StartSteps
 
 _mit Tommy_
