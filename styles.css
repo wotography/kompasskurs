@@ -8,6 +8,7 @@ body {
     background-color: #8f4c9b;
     color: #333;
 }
+
 .container {
     max-width: 600px;
     margin: 20px auto;
@@ -270,5 +271,103 @@ button:hover {
 @media (max-width: 480px) {
   .gallery {
       grid-template-columns: 1fr; /* Eine Spalte */
+  }
+}
+
+
+
+/* VITA*/
+
+.vita {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1em;
+  color: #555;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #007BFF;
+}
+
+.job, .education {
+  margin-bottom: 10px;
+}
+
+.job h3, .education h3 {
+  font-size: 1.2em;
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  margin-left: 20px;
+}
+
+ul li {
+  margin-bottom: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .vita {
+      padding: 15px;
+  }
+
+  header h1 {
+      font-size: 1.8em;
+  }
+
+  .section h2 {
+      font-size: 1.3em;
+  }
+}
+
+
+/* Glowing */
+
+.dark {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Horizontale Zentrierung */
+  align-items: center; /* Vertikale Zentrierung */
+  height: 100vh;
+  background-color: #111;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+}
+
+.glowing-text {
+  font-size: 72px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  animation: glow 0.5s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+      text-shadow: 0 0 5px #ff007f, 0 0 10px #ff007f, 0 0 15px #ff007f, 0 0 20px #ff007f, 0 0 30px #ff007f;
+  }
+  100% {
+      text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f, 0 0 30px #ff007f, 0 0 40px #ff007f, 0 0 50px #ff007f;
   }
 }
