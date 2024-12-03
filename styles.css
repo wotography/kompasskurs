@@ -114,3 +114,44 @@ nav ul li:hover > a {
 nav ul li:hover .submenu {
   display: block;
 }
+
+.features {
+display: flex;
+justify-content: space-around; /* Horizontal zentrieren */
+align-items: center; /* Vertikal zentrieren */
+text-align: center;
+padding: 20px;
+background-color: #f9f9f9;
+height: 100vh; /* Beispielhöhe: gesamte Ansichtshöhe */
+}
+
+.feature-item {
+  width: 30%;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.feature-item img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.feature-item h3 {
+  margin: 10px 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.feature-item p {
+  color: #666;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
