@@ -60,6 +60,7 @@ nav {
 nav a {
   text-decoration: none;
   padding: 5px 10px;
+  color: inherit;
 }
 nav a:hover {
   background-color: #555;
@@ -92,6 +93,7 @@ nav ul li:hover > a {
 .submenu {
   display: none;
   position: absolute;
+  color: inherit;
   top: 100%;
   left: 0;
   background-color: #333;
