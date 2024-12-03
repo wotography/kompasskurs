@@ -13,4 +13,18 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch(error => console.error("Fehler:", error));
     }
+    const placeholder2 = document.getElementById("footer-placeholder");
+    if (placeholder2) {
+        fetch('footer.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Footer konnte nicht geladen werden");
+                }
+                return response.text();
+            })
+            .then(data => {
+                placeholder2.innerHTML = data;
+            })
+            .catch(error => console.error("Fehler:", error));
+    }
 });
