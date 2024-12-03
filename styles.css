@@ -116,13 +116,13 @@ nav ul li:hover .submenu {
 }
 
 .features {
-display: flex;
-justify-content: space-around; /* Horizontal zentrieren */
-align-items: center; /* Vertikal zentrieren */
-text-align: center;
-padding: 20px;
-background-color: #f9f9f9;
-height: 100vh; /* Beispielhöhe: gesamte Ansichtshöhe */
+  display: flex;
+  justify-content: space-around; /* Horizontal zentrieren */
+  align-items: center; /* Vertikal zentrieren */
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  height: 100vh; /* Beispielhöhe: gesamte Ansichtshöhe */
 }
 
 .feature-item {
@@ -154,4 +154,8 @@ height: 100vh; /* Beispielhöhe: gesamte Ansichtshöhe */
   color: #666;
   font-size: 0.9em;
   line-height: 1.4;
+}
+
+.features a {
+  color: #764a4a;
 }
