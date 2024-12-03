@@ -1,9 +1,11 @@
+/* MAIN */
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.0;
     margin: 0;
     padding: 0;
-    background-color: #d5d5d5;
+    background-color: #8f4c9b;
     color: #333;
 }
 .container {
@@ -41,13 +43,25 @@ p {
   margin: 20px 60px;
 
 }
+
+
+
+/* Header */
+
 header {
-  background-color: #333;
+  background-color: #57a7a0;
   color: white;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+header a {
+  color: white;
+  text-decoration: none;
+}
+footer {
+  color: white;
 }
 .logo {
   font-size: 1.5em;
@@ -63,7 +77,7 @@ nav a {
   color: inherit;
 }
 nav a:hover {
-  background-color: #555;
+  background-color: #9575CD;
   border-radius: 5px;
 }
 
@@ -87,7 +101,7 @@ nav ul li a {
 }
 
 nav ul li:hover > a {
-  background-color: #333;
+  background-color: #9575CD;
 }
 
 .submenu {
@@ -96,7 +110,7 @@ nav ul li:hover > a {
   color: inherit;
   top: 100%;
   left: 0;
-  background-color: #333;
+  background-color: #33837d;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   z-index: 1000;
@@ -115,14 +129,18 @@ nav ul li:hover .submenu {
   display: block;
 }
 
+
+/* Features */
+
 .features {
   display: flex;
   justify-content: space-around; /* Horizontal zentrieren */
   align-items: center; /* Vertikal zentrieren */
   text-align: center;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #e1d0b4;
   height: 100vh; /* Beispielhöhe: gesamte Ansichtshöhe */
+  gap: 20px;
 }
 
 .feature-item {
@@ -130,7 +148,7 @@ nav ul li:hover .submenu {
   padding: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  background-color: white;
+  background-color: #e7e1cf;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -158,4 +176,99 @@ nav ul li:hover .submenu {
 
 .features a {
   color: #764a4a;
+}
+
+
+/* Media Query für mobile Geräte */
+@media screen and (max-width: 768px) {
+  .features {
+      flex-direction: column; /* Die Elemente übereinander anordnen */
+      align-items: center; /* Zentrieren */
+      height: auto; /* Höhe an den Inhalt anpassen */
+  }
+
+  .feature-item {
+      width: 80%; /* Auf mobilen Geräten breiter */
+      margin-bottom: 20px; /* Abstand zwischen den Items */
+  }
+}
+
+
+/* QUIZ */
+h1 {
+  text-align: center;
+}
+.question {
+  margin: 20px 0;
+}
+.question h2 {
+  font-size: 1.2em;
+}
+.answers {
+  list-style-type: none;
+  padding: 0;
+}
+.answers li {
+  margin: 5px 0;
+}
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #0056b3;
+}
+.result {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Drei Spalten */
+  gap: 20px;
+  max-width: 1200px;
+  margin: 20px;
+}
+
+.gallery-item {
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.gallery-item img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.gallery-item p {
+  color: #333;
+  font-size: 1em;
+}
+
+/* Für kleinere Bildschirme */
+@media (max-width: 768px) {
+  .gallery {
+      grid-template-columns: repeat(2, 1fr); /* Zwei Spalten */
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+      grid-template-columns: 1fr; /* Eine Spalte */
+  }
 }
