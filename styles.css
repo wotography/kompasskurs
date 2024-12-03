@@ -61,9 +61,6 @@ header a {
   color: white;
   text-decoration: none;
 }
-footer {
-  color: white;
-}
 .logo {
   font-size: 1.5em;
   font-weight: bold;
@@ -128,6 +125,13 @@ nav ul li:hover > a {
 
 nav ul li:hover .submenu {
   display: block;
+}
+
+
+/* FOOTER */
+
+footer {
+  color: white;
 }
 
 
@@ -234,6 +238,15 @@ button:hover {
 
 
 /* GALLERY */
+.flex {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Horizontale Zentrierung */
+  align-items: center; /* Vertikale Zentrierung */
+  height: 100vh;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Drei Spalten */
@@ -279,10 +292,10 @@ button:hover {
 /* VITA*/
 
 .vita {
-  max-width: 900px;
+  max-width: 800px;
   margin: 20px auto;
   padding: 20px;
-  background-color: white;
+  background-color: #e5c5ea;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -341,7 +354,7 @@ ul li {
 }
 
 
-/* Glowing */
+/* Facny Text Glowing */
 
 .dark {
   margin: 0;
