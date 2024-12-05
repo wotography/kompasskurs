@@ -389,7 +389,7 @@ ul li {
 /* Taschenrechner */
 
 .calculator {
-  background-color: #fff;
+  background-color: #474738;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -419,13 +419,13 @@ button {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #ba4646;
+  background-color: #337a36;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #ddd;
+  background-color: #529955;
 }
 
 button:active {
@@ -438,7 +438,16 @@ button:active {
   color: white;
 }
 
+.equal-button:hover {
+  grid-column: span 2;
+  background-color: #8bcb8e;
+}
+
 .clear-button {
   background-color: #f44336;
   color: white;
+}
+
+.clear-button:hover {
+  background-color: #f57269;
 }
