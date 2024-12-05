@@ -1,3 +1,5 @@
+/* Header einbinden */
+
 document.addEventListener("DOMContentLoaded", () => {
     const placeholder = document.getElementById("header-placeholder");
     if (placeholder) {
@@ -29,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+
+/* Kontaktformular */
 document.getElementById("contact-form").addEventListener("submit", function(event) {
     event.preventDefault();
 
