@@ -1,0 +1,289 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <title>Übersicht</title>
+    <script async src="https://ga.jspm.io/npm:es-module-shims@1.5.1/dist/es-module-shims.js" crossorigin="anonymous"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.167.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.167.0/examples/jsm/"
+        }
+      }
+    </script>
+    <style>
+    /*  body {
+        margin: 0;
+        overflow-x: hidden;
+        font-family: sans-serif;
+      }
+    */
+      canvas {
+        display: block;
+      }
+      .content {
+        min-height: 300vh; /* Simuliert Scrollen */
+        padding: 20px;
+      }
+    
+    </style>
+  </head>
+<body>
+    <!-- Platzhalter für den Header -->
+    <div id="header-placeholder"></div>
+
+    <section class="features">
+        <div class="content">
+            <h1>Dynamic Shapes with Three.js</h1>
+            <p>Scroll down to see the dynamic shapes on both sides.</p>
+          </div>
+    </section>
+
+<script type="module">
+
+/* VERSION ZWEI
+import * as THREE from "three";
+
+let scene, camera, renderer, shapes = [];
+let lastScrollY = 0, viewportHeight;
+
+function init() {
+  // Szene, Kamera und Renderer initialisieren
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 10;
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor("gainsboro", 1); // Hintergrundfarbe
+  document.body.appendChild(renderer.domElement);
+
+  // Shapes am Rand erzeugen
+  viewportHeight = window.innerHeight / 100;
+  let yOffset = 0;
+  for (let i = 0; i < 20; i++) {
+    const spacing = Math.random() * 0.2 + 0.1; // Variable Distanz (10 % bis 30 %)
+    yOffset += spacing * window.innerHeight; // Y-Versatz basierend auf Distanz
+
+    const leftShape = createDynamicShape(-6, yOffset); // Links
+    const rightShape = createDynamicShape(6, yOffset); // Rechts
+    shapes.push(leftShape, rightShape);
+    scene.add(leftShape, rightShape);
+  }
+
+  // Event-Listener für Fenstergrößenänderung und Scrollen
+  window.addEventListener("resize", onWindowResize);
+  window.addEventListener("scroll", onScroll);
+
+  // Animation starten
+  animate();
+}
+
+function createDynamicShape(xPosition, yOffset) {
+  // Erstellt ein Shape mit zufälliger Form und Farbe
+  const N = 8 + Math.floor(Math.random() * 5); // Zufällige Anzahl von Punkten (8–12)
+  const vertices = [];
+  for (let i = 0; i < N; i++) {
+    const angle = (i / (N - 1)) * Math.PI; // Halber Kreis
+    const radiusX = (1.5 + Math.random() * 0.5) * 0.5; // Reduziert um 50%
+    const radiusY = (4 + Math.random() * 2) * 0.5; // Reduziert um 50%
+    vertices.push(new THREE.Vector3(radiusX * Math.cos(angle), radiusY * Math.sin(angle), 0));
+  }
+
+  // Form schließen
+  vertices.push(new THREE.Vector3(-0.75, -2, 0)); // Linke untere Ecke
+  vertices.push(new THREE.Vector3(0.75, -2, 0)); // Rechte untere Ecke
+
+  const shapeGeom = new THREE.Shape(vertices);
+  const geometry = new THREE.ExtrudeGeometry(shapeGeom, {
+    steps: 1,
+    depth: 0.1, // Dünne Tiefe
+    bevelEnabled: false, // Keine Kantenabrundung
+  });
+
+  // Farbe variieren (Helligkeit und Sättigung ±10 %)
+  const baseColor = new THREE.Color("#b2c2a1"); // Basisfarbe
+  const hsl = baseColor.getHSL({});
+  const randomSaturation = Math.min(1, Math.max(0, hsl.s + (Math.random() - 0.5) * 0.1));
+  const randomLightness = Math.min(1, Math.max(0, hsl.l + (Math.random() - 0.5) * 0.1));
+  baseColor.setHSL(hsl.h, randomSaturation, randomLightness);
+
+  const material = new THREE.MeshBasicMaterial({
+    color: baseColor,
+    side: THREE.DoubleSide,
+  });
+
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.set(xPosition, yOffset, 0);
+  return mesh;
+}
+
+function onWindowResize() {
+  // Anpassung an Fenstergröße
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function onScroll() {
+  // Scroll-Position aktualisieren
+  const currentScrollY = window.scrollY / window.innerHeight;
+  const deltaScroll = currentScrollY - lastScrollY; // Veränderung seit dem letzten Scroll
+  lastScrollY = currentScrollY; // Neue letzte Position speichern
+
+  // Shapes basierend auf Scrollmenge verschieben
+  shapes.forEach((shape) => {
+    shape.position.y -= deltaScroll * 10; // Scroll-basierte Bewegung
+    if (shape.position.y < -viewportHeight) {
+      shape.position.y += viewportHeight * 10; // Recyclen: Unten wieder einfügen
+      regenerateShape(shape); // Neue zufällige Form und Farbe erstellen
+    } else if (shape.position.y > viewportHeight * 10) {
+      shape.position.y -= viewportHeight * 10; // Recyclen: Oben wieder einfügen
+      regenerateShape(shape); // Neue zufällige Form und Farbe erstellen
+    }
+  });
+}
+
+function regenerateShape(shape) {
+  // Erzeugt eine neue zufällige Form und Farbe für ein Shape
+  const N = 8 + Math.floor(Math.random() * 5);
+  const vertices = [];
+  for (let i = 0; i < N; i++) {
+    const angle = (i / (N - 1)) * Math.PI;
+    const radiusX = (1.5 + Math.random() * 0.5) * 0.5;
+    const radiusY = (4 + Math.random() * 2) * 0.5;
+    vertices.push(new THREE.Vector3(radiusX * Math.cos(angle), radiusY * Math.sin(angle), 0));
+  }
+  vertices.push(new THREE.Vector3(-0.75, -2, 0));
+  vertices.push(new THREE.Vector3(0.75, -2, 0));
+
+  const shapeGeom = new THREE.Shape(vertices);
+  shape.geometry.dispose();
+  shape.geometry = new THREE.ExtrudeGeometry(shapeGeom, {
+    steps: 1,
+    depth: 0.1,
+    bevelEnabled: false,
+  });
+
+  // Farbe variieren
+  const baseColor = new THREE.Color("#b2c2a1");
+  const hsl = baseColor.getHSL({});
+  const randomSaturation = Math.min(1, Math.max(0, hsl.s + (Math.random() - 0.5) * 0.1));
+  const randomLightness = Math.min(1, Math.max(0, hsl.l + (Math.random() - 0.5) * 0.1));
+  baseColor.setHSL(hsl.h, randomSaturation, randomLightness);
+  shape.material.color = baseColor;
+}
+
+function animate() {
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+
+// Initialisierung starten
+init();
+*/
+
+
+/* VERSION EINS */
+import * as THREE from "three";
+
+let scene, camera, renderer, shapes = [], scrollY = 0;
+
+function init() {
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 10;
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor("gainsboro", 1);
+  document.body.appendChild(renderer.domElement);
+
+  // Links und rechts Formen hinzufügen
+  for (let i = 0; i < 2; i++) {
+    const shape = createDynamicShape(i === 0 ? -5 : 5);
+    shapes.push(shape);
+    scene.add(shape);
+  }
+
+  window.addEventListener("resize", onWindowResize);
+  window.addEventListener("scroll", onScroll);
+
+  animate();
+}
+
+function createDynamicShape(xPosition) {
+  const geometry = new THREE.BufferGeometry();
+  const material = new THREE.MeshBasicMaterial({
+    color: "coral", // Hier die Farbe ändern
+    side: THREE.DoubleSide,
+    clippingPlanes: [
+      new THREE.Plane(new THREE.Vector3(0, 0, -1), 0),
+      new THREE.Plane(new THREE.Vector3(0, 0, 1), 0.001)
+    ]
+  });
+  
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.x = xPosition; // Links oder rechts
+  return mesh;
+}
+
+
+function updateShape(shape, time) {
+  const N = 8; // Weniger Punkte für einfachere, organische Formen
+  const vertices = [];
+  for (let i = 0; i < N; i++) {
+    const angle = (i / (N - 1)) * Math.PI; // Nur die obere Hälfte für "seitliche" Wellen
+    const radiusX = 3 + Math.sin(time / 3000 + i) * 0.5; // Sanfte Wellenbewegung
+    const radiusY = 8; // Vertikale Ausdehnung
+    vertices.push(new THREE.Vector3(radiusX * Math.cos(angle), radiusY * Math.sin(angle), 0));
+  }
+
+  // Form schließen (unten zurück zur Achse)
+  vertices.push(new THREE.Vector3(-3, -8, 0)); // Linke untere Ecke
+  vertices.push(new THREE.Vector3(3, -8, 0)); // Rechte untere Ecke
+
+  const shapeGeom = new THREE.Shape(vertices);
+  shape.geometry.dispose();
+  shape.geometry = new THREE.ExtrudeGeometry(shapeGeom, {
+    steps: 1,
+    depth: 0.5,
+    bevelEnabled: false, // Kein Bevel für klare Kanten
+  });
+}
+
+
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function onScroll() {
+  scrollY = -window.scrollY / window.innerHeight; // Invertiere den Scroll-Wert
+}
+
+
+function animate(time) {
+  shapes.forEach((shape, index) => {
+    updateShape(shape, time + index * 500); // Offset für mehr Dynamik
+    shape.position.y = -scrollY * 5 + (index === 0 ? 2 : -2); // Scroll-abhängige Position
+  });
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+
+init();
+
+    </script>
+
+    <!-- Platzhalter für den Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Externes JavaScript einbinden -->
+    <script src="script.js"></script>
+</body>
+</html>
