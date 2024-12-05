@@ -386,6 +386,7 @@ ul li {
 }
 
 
+
 /* Taschenrechner */
 
 .calculator {
@@ -450,4 +451,71 @@ button:active {
 
 .clear-button:hover {
   background-color: #f57269;
+}
+
+
+/* KONTAKT */
+
+.form-group {
+  margin: 15px 0;
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #3498db;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+textarea {
+  height: 150px;
+  resize: none;
+}
+
+knopf {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+knopf:hover {
+  background-color: #2980b9;
+}
+
+#form-response {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #27ae60;
+  display: none;
+}
+
+#error-response {
+  color: #e74c3c;
+}
+
+
+/* SHAPES */
+
+canvas {
+  display: block;
+}
+.content {
+  min-height: 300vh; /* Simuliert Scrollen */
+  padding: 20px;
 }

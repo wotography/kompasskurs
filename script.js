@@ -28,3 +28,31 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error("Fehler:", error));
     }
 });
+
+document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let message = document.getElementById("message").value;
+
+    if (name === "" || email === "" || message === "") {
+        showError("Alle Felder müssen ausgefüllt werden!");
+    } else {
+        showResponse("Danke, " + name + "! Deine Nachricht wurde erfolgreich gesendet.");
+        document.getElementById("contact-form").reset();
+    }
+});
+
+function showResponse(responseText) {
+    let responseDiv = document.getElementById("form-response");
+    responseDiv.textContent = responseText;
+    responseDiv.style.display = "block";
+}
+
+function showError(errorText) {
+    let responseDiv = document.getElementById("form-response");
+    responseDiv.textContent = errorText;
+    responseDiv.style.display = "block";
+    responseDiv.style.color = "#e74c3c";
+}
