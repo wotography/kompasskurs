@@ -518,4 +518,5 @@ canvas {
 .content {
   min-height: 300vh; /* Simuliert Scrollen */
   padding: 20px;
+  margin-top: 200vh;
 }
