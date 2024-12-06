@@ -31,9 +31,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+/* mobile header menu 
+function toggleMenu() {
+    const nav = document.querySelector('nav');
+    nav.classList.toggle('active');
+  }
+  
+  document.querySelectorAll('.menu > ul > li > a').forEach(item => {
+    item.addEventListener('click', function (e) {
+      const parent = this.parentElement;
+      parent.classList.toggle('open');
+    });
+  });
+  */
 
 /* Kontaktformular */
-document.getElementById("contact-form").addEventListener("submit", function(event) {
+if (document.getElementById("contact-form")) {
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
     event.preventDefault();
 
     let name = document.getElementById("name").value;
@@ -47,6 +61,7 @@ document.getElementById("contact-form").addEventListener("submit", function(even
         document.getElementById("contact-form").reset();
     }
 });
+}
 
 function showResponse(responseText) {
     let responseDiv = document.getElementById("form-response");
@@ -60,3 +75,24 @@ function showError(errorText) {
     responseDiv.style.display = "block";
     responseDiv.style.color = "#e74c3c";
 }
+
+
+function toggleMenu() {
+    const nav = document.querySelector('header .menu');
+    const hamburger = document.querySelector('.hamburger');
+    nav.classList.toggle('active');
+    hamburger.classList.toggle('open');
+    console.log('Menu toggled:', nav.classList.contains('active')); // Debug-Ausgabe
+}
+
+document.querySelectorAll('.menu > ul > li > a').forEach(item => {
+    item.addEventListener('click', function (e) {
+        const parent = this.parentElement;
+        const submenu = parent.querySelector('.submenu');
+        
+        if (submenu) {
+            e.preventDefault();
+            parent.classList.toggle('open');
+        }
+    });
+});

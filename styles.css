@@ -66,7 +66,6 @@ header a {
   font-weight: bold;
 }
 nav {
-  display: flex;
   gap: 15px;
 }
 nav a {
@@ -125,6 +124,108 @@ nav ul li:hover > a {
 
 nav ul li:hover .submenu {
   display: block;
+}
+
+@media screen and (min-width: 769px) {
+  .hamburger {
+      display: none; /* Versteckt die Hamburger-Schaltfläche auf großen Bildschirmen */
+  }
+
+  nav {
+      display: flex; /* Stellt sicher, dass die Navigation auf großen Bildschirmen sichtbar bleibt */
+  }
+}
+
+
+/* Media Query für mobile Geräte */
+@media screen and (max-width: 768px) {
+  header {
+    flex-wrap: wrap;
+    padding: 10px;
+    position: relative;
+  }
+
+  .logo {
+    font-size: 1.2em;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+.hamburger.open div:nth-child(1) {
+  transform: rotate(45deg);
+  transform-origin: top left;
+}
+.hamburger.open div:nth-child(2) {
+  opacity: 0; /* Mittlere Linie ausblenden */
+}
+.hamburger.open div:nth-child(3) {
+  transform: rotate(-45deg);
+  transform-origin: bottom left;
+}
+
+  nav {
+    display: none; /* Navigation standardmäßig ausblenden */
+    flex-direction: column;
+    max-height: 0; /* Standardmäßig unsichtbar */
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    gap: 10px;
+    background-color: #33837d;
+    padding: 10px 20px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  nav.active {
+    display: flex; /* Navigation einblenden */
+    min-height: 100vh; /* Genug Platz, um das Menü anzuzeigen */
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  nav ul li {
+    position: relative;
+  }
+
+  nav ul li a {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .submenu {
+    display: none; /* Untermenü standardmäßig ausgeblendet */
+    flex-direction: column;
+    background-color: #33837d;
+    border-radius: 4px;
+    padding: 5px 0;
+  }
+
+  nav ul li.open .submenu {
+    display: flex; /* Untermenü bei Bedarf einblenden */
+  }
+
+  .submenu li a {
+    padding: 10px 20px;
+  }
 }
 
 
